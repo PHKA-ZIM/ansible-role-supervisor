@@ -1,0 +1,22 @@
+---
+- name: Ensure supervisord is stopped
+  become: true
+  ansible.builtin.service:
+    name: supervisord
+    state: stopped
+
+- name: Remove supervisor.d configuration based on files
+  become: true
+  ansible.builtin.file:
+    path: "{{ supervisor_supervisord_path }}/{{ item | basename }}"
+    state: absent
+  with_fileglob:
+    - "{{ supervisor_local_supervisord_path }}/*.conf"
+
+- name: Remove supervisor.d configuration based on templates
+  become: true
+  ansible.builtin.file:
+    path: "{{ supervisor_supervisord_path }}/{{ item | basename | splitext | first }}"
+    state: absent
+  with_fileglob:
+    - "{{ supervisor_local_supervisord_path }}/*.conf.j2"

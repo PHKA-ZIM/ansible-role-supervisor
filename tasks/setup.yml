@@ -1,0 +1,31 @@
+---
+- name: Copy supervisor.d files
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ supervisor_supervisord_path }}"
+    mode: "{{ supervisor_file_mode }}"
+    force: true
+  with_fileglob:
+    - "{{ supervisor_local_supervisord_path }}/*.conf"
+  notify:
+    - reload configuration
+
+- name: Copy supervisor.d templates
+  become: true
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ supervisor_supervisord_path }}/{{  item | basename | splitext | first }}"
+    mode: "{{ supervisor_file_mode }}"
+    force: true
+  with_fileglob:
+    - "{{ supervisor_local_supervisord_path }}/*.conf.j2"
+  notify:
+    - reload configuration
+
+- name: Ensure supervisord is started and enabled on boot
+  become: true
+  ansible.builtin.service:
+    name: supervisord
+    state: started
+    enabled: "{{ supervisord_enabled_on_startup }}"

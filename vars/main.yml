@@ -1,0 +1,6 @@
+---
+supervisor_packages:
+  - supervisor
+
+supervisor_supervisord_path: /etc/supervisor/conf.d/
+supervisor_file_mode: 0644

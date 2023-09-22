@@ -1,0 +1,7 @@
+---
+supervisor_local_supervisord_path: ./supervisor.d/
+supervisord_enabled_on_startup: true
+
+supervisor_uninstall: false
+supervisor_autoclean: true
+supervisor_purge: true
