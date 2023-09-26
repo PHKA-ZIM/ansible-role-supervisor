@@ -1,4 +1,3 @@
 ---
 - name: reload configuration
-  become: true
   ansible.builtin.include_tasks: supervisor.yml
