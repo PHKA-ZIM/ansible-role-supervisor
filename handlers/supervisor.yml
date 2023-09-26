@@ -1,0 +1,15 @@
+---
+- name: Reread config
+  become: true
+  ansible.builtin.command:
+    cmd: "supervisorctl reread"
+
+- name: Update existing workers
+  become: true
+  ansible.builtin.command:
+    cmd: "supervisorctl update"
+
+- name: Start new workers
+  become: true
+  ansible.builtin.command:
+    cmd: "supervisorctl start all"

@@ -1,5 +1,4 @@
 ---
 - name: reload configuration
   become: true
-  ansible.builtin.command:
-    cmd: "supervisorctl reread && supervisorctl update && supervisorctl start all"
+  ansible.builtin.include_tasks: supervisor.yml
