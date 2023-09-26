@@ -26,6 +26,6 @@
 - name: Ensure supervisord is started and enabled on boot
   become: true
   ansible.builtin.service:
-    name: supervisord
+    name: supervisor
     state: started
-    enabled: "{{ supervisord_enabled_on_startup }}"
+    enabled: "{{ supervisor_enabled_on_startup }}"
