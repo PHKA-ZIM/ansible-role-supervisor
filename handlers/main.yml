@@ -1,3 +1,3 @@
 ---
 - name: reload configuration
-  ansible.builtin.include_tasks: supervisor.yml
+  ansible.builtin.include_tasks: handlers/supervisor.yml
